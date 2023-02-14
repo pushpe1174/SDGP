@@ -1,3 +1,4 @@
+import 'package:currency_mate_app/Screens/camera_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -29,7 +30,9 @@ class HomeScreen extends StatelessWidget {
                   width: 300,
                   height: 180,
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.pushNamed(context, '/detect_currency');
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[300],
                       shape: RoundedRectangleBorder(

@@ -1,3 +1,4 @@
+import 'package:currency_mate_app/Screens/home_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
+      home: const HomeScreen(),
     );
   }
 }

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../Utils/style.dart';
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Style.bgColor,
+      backgroundColor: const Color(0xffF1FAEE),
       appBar: AppBar(
-        title: const Text("Login Page"),
+        title: const Text("Sign-up Page"),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),
@@ -49,12 +47,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: (){},
-              child: const Text(
-                'Forgot Password',
-                style: TextStyle(color:Color(0xff1D3557), fontSize: 15),
-              ),
+            const SizedBox(
+                height: 20
             ),
             Container(
               height: 50,
@@ -67,27 +61,13 @@ class LoginScreen extends StatelessWidget {
 
                 },
                 child: const Text(
-                  'Login',
+                  'Sign-in',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),),
             ),
             const SizedBox(
               height: 130,
             ),
-            Column(
-              children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(onPressed: (){},
-                        child: const Text("create account",
-                            style: TextStyle(color: Color(0xff1D3557))),
-                      )
-                    ]
-                )
-              ],
-            )
-
           ],
         ),
       ),

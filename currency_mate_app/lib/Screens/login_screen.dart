@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../Utils/style.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Style.bgColor,
       appBar: AppBar(
         title: const Text("Login Page"),
+        centerTitle: true,
+        backgroundColor: const Color(0xff1D3557),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,15 +53,16 @@ class LoginScreen extends StatelessWidget {
               onPressed: (){},
               child: const Text(
                 'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
+                style: TextStyle(color:Color(0xff1D3557), fontSize: 15),
               ),
             ),
             Container(
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                  color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
                 onPressed: () {
 
                 },
@@ -74,7 +79,10 @@ class LoginScreen extends StatelessWidget {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(onPressed: (){}, child: const Text("create account"))
+                      TextButton(onPressed: (){},
+                        child: const Text("create account",
+                            style: TextStyle(color: Color(0xff1D3557))),
+                      )
                     ]
                 )
               ],

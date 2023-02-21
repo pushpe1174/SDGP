@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),
-        '/detect_currency':(context)=>  const DetectCurrency(),
+        '/detect_currency':(context)=> const DetectCurrency(),
       },
     );
   }

@@ -1,3 +1,6 @@
+import 'package:currency_mate_app/Screens/camera_screen.dart';
+import 'package:currency_mate_app/Screens/home_screen.dart';
+import 'package:currency_mate_app/Screens/loading_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +16,12 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
+      initialRoute: '/home' ,
+      routes: {
+        '/loading':(context)=> const LoadingScreen(),
+        '/home':(context)=> const HomeScreen(),
+        '/detect_currency':(context)=> const DetectCurrency(),
+      },
     );
   }
 }

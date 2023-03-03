@@ -7,13 +7,16 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: const Color(0xffF1FAEE),
+
       appBar: AppBar(
         title: const Text("Sign-up Page"),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),
+
       body: SingleChildScrollView(
         child: Column(
           children:[
@@ -26,6 +29,7 @@ class SignupScreen extends StatelessWidget {
                     child: Image.asset('assets/SplashLogo.png')),
               ),
             ),
+
             const Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -36,6 +40,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             const Padding(
               padding: EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
@@ -49,6 +54,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             const SizedBox(
                 height: 20
             ),
@@ -70,6 +76,7 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),),
             ),
+
             const SizedBox(
               height: 130,
             ),

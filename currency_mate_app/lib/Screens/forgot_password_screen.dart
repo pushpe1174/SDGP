@@ -49,7 +49,7 @@ class ForgotPassword extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
-                
+
               },
               child: const Text('Reset Password'),
             ),

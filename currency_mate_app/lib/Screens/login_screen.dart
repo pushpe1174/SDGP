@@ -8,16 +8,20 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Style.bgColor,
+
       appBar: AppBar(
         title: const Text("Login Page"),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),
+
       body: SingleChildScrollView(
         child: Column(
           children:[
+
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
@@ -27,6 +31,7 @@ class LoginScreen extends StatelessWidget {
                     child: Image.asset('assets/SplashLogo.png')),
               ),
             ),
+
             const Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -37,6 +42,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             const Padding(
               padding: EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
@@ -50,6 +56,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             TextButton(
               onPressed: (){},
               child: const Text(
@@ -57,6 +64,7 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(color:Color(0xff1D3557), fontSize: 15),
               ),
             ),
+
             Container(
               height: 50,
               width: 250,
@@ -75,9 +83,11 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),),
             ),
+
             const SizedBox(
               height: 130,
             ),
+
             Column(
               children: [
                 Row(

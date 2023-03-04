@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'home_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -7,7 +6,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: const Color(0xffF1FAEE),
 

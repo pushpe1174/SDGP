@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),
         '/detect_currency':(context)=> const DetectCurrency(),
-        '/login':(context)=> const LoginScreen(),
+        '/login':(context)=>  LoginScreen(),
         '/sign_in':(context)=>  SignupScreen(),
         '/forgot_password':(context)=>  const ForgotPassword(),
         '/record':(context)=> const MainPage(),

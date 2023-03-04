@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../Utils/style.dart';
+import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'sign_in_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  final loginEmailController=TextEditingController();
+  final loginPasswordController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +36,30 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            const Padding(
+             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-                decoration: InputDecoration(
+
+                controller: loginEmailController,
+
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                 ),
               ),
             ),
 
-            const Padding(
-              padding: EdgeInsets.only(
+             Padding(
+              padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
 
+                controller: loginPasswordController,
+
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                 ),
@@ -59,7 +67,12 @@ class LoginScreen extends StatelessWidget {
             ),
 
             TextButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ForgotPassword()),
+                );
+              },
               child: const Text(
                 'Forgot Password',
                 style: TextStyle(color:Color(0xff1D3557), fontSize: 15),

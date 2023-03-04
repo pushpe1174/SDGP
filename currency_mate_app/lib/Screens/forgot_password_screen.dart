@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
@@ -51,10 +52,12 @@ class ForgotPassword extends StatelessWidget {
               style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
               onPressed: () {
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  LoginScreen()),
-                );
+                FirebaseAuth.instance.sendPasswordResetEmail(email: resetEmailController.text).then((value) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen())
+                  );
+                });
 
               },
               child: const Text('Reset Password'),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
@@ -71,10 +72,13 @@ class SignupScreen extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen())
-                  );
+                  FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen())
+                    );
+                  });
+
                 },
                 child: const Text(
                   'Sign-in',

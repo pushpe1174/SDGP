@@ -4,7 +4,10 @@ import 'login_screen.dart';
 
 
 class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+   ForgotPassword({Key? key}) : super(key: key);
+
+  final resetEmailController=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +32,15 @@ class ForgotPassword extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(
+             Padding(
+              padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+
+                controller: resetEmailController,
+
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                 ),

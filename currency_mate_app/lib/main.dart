@@ -6,9 +6,14 @@ import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:currency_mate_app/Screens/record.dart';
 import 'package:currency_mate_app/Screens/sign_in_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/record' ,
+      initialRoute: '/login' ,
       routes: {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),

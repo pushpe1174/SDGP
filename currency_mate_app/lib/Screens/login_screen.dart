@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Utils/style.dart';
 import 'home_screen.dart';
+import 'sign_in_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -93,7 +94,12 @@ class LoginScreen extends StatelessWidget {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(onPressed: (){},
+                      TextButton(onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  const SignupScreen()),
+                        );
+                      },
                         child: const Text("create account",
                             style: TextStyle(color: Color(0xff1D3557))),
                       )

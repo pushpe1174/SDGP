@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+  SignupScreen({Key? key}) : super(key: key);
+  final signupEmailController=TextEditingController();
+  final signupPasswordController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +30,30 @@ class SignupScreen extends StatelessWidget {
               ),
             ),
 
-            const Padding(
+             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-                decoration: InputDecoration(
+
+                controller: signupEmailController,
+
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                 ),
               ),
             ),
 
-            const Padding(
-              padding: EdgeInsets.only(
+             Padding(
+              padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
 
+                controller: signupPasswordController,
+
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                 ),

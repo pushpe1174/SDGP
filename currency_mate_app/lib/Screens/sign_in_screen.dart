@@ -71,13 +71,23 @@ class SignupScreen extends StatelessWidget {
                   color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-                onPressed: () {
-                  FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomeScreen())
+                onPressed: () async{
+
+                  try{
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomeScreen())
+                      );
+                    });
+
+                  }on FirebaseAuthException catch (e){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content:Text(e.message.toString()),
+                          backgroundColor: Colors.red,)
                     );
-                  });
+                  }
+
 
                 },
                 child: const Text(

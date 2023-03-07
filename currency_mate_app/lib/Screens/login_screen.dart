@@ -8,7 +8,7 @@ import 'sign_in_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  
+
   final loginEmailController=TextEditingController();
   final loginPasswordController=TextEditingController();
 

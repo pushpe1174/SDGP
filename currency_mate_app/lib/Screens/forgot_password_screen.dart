@@ -50,14 +50,24 @@ class ForgotPassword extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-              onPressed: () {
+              onPressed: () async {
 
-                FirebaseAuth.instance.sendPasswordResetEmail(email: resetEmailController.text).then((value) {
+                try{
+                  await FirebaseAuth.instance.sendPasswordResetEmail(email: resetEmailController.text).then((value) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen())
                   );
                 });
+
+                }on FirebaseAuthException catch (e){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content:Text(e.message.toString()),
+                        backgroundColor: Colors.red,)
+                  );
+                }
+
+
 
               },
               child: const Text('Reset Password'),

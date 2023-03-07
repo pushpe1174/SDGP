@@ -8,6 +8,7 @@ import 'sign_in_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
+  
   final loginEmailController=TextEditingController();
   final loginPasswordController=TextEditingController();
 
@@ -87,14 +88,23 @@ class LoginScreen extends StatelessWidget {
                   color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-                onPressed: () {
+                onPressed: ()async {
 
-                  FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const HomeScreen())
+                  try{
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomeScreen())
+                      );
+                    });
+                  }on FirebaseAuthException catch (e){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content:Text(e.message.toString()),
+                        backgroundColor: Colors.red,)
                     );
-                  });
+                  }
+
+
 
                 },
                 child: const Text(

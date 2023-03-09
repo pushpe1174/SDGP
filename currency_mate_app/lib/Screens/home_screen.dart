@@ -2,6 +2,7 @@ import 'package:currency_mate_app/Screens/camera_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -9,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Style.bgColor,
+
       appBar: AppBar(
         title: Text(
           "Home",
@@ -18,6 +20,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color(0xff1D3557),
         elevation: 0,
       ),
+
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
         child: Container(
@@ -30,9 +33,11 @@ class HomeScreen extends StatelessWidget {
                   width: 300,
                   height: 180,
                   child: ElevatedButton(
+
                     onPressed: (){
                       Navigator.pushNamed(context, '/detect_currency');
                     },
+
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[300],
                       shape: RoundedRectangleBorder(
@@ -68,6 +73,7 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
+
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

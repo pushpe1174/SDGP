@@ -8,9 +8,11 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Style.bgColor,
       body: SafeArea(
+
         child: Padding(
           padding: const EdgeInsets.fromLTRB(40.0, 120.0, 40.0, 0.0),
           child: Column(
@@ -25,10 +27,12 @@ class LoadingScreen extends StatelessWidget {
                         )
                     ),
                     const Gap(10),
+
                     Text(
                       "currencyMate".toUpperCase(),
                       style: Style.loadingStyle,
                     ),
+
                     const Gap(25),
                     const SpinKitCircle(
                       color: Color(0xff9EC359),
@@ -37,6 +41,7 @@ class LoadingScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 Text(
                   "#TeamElite",
                   style: Style.loadingTeamStyle,

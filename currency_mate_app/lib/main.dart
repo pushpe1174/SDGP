@@ -5,6 +5,7 @@ import 'package:currency_mate_app/Screens/loading_screen.dart';
 import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:currency_mate_app/Screens/record_screen.dart';
 import 'package:currency_mate_app/Screens/sign_in_screen.dart';
+import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/record' ,
+      initialRoute: '/summary' ,
       routes: {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/sign_in':(context)=>  SignupScreen(),
         '/forgot_password':(context)=>   ForgotPassword(),
         '/record':(context)=> const RecordScreen(),
-
+        '/summary':(context)=> const SummaryScreen(),
       },
     );
   }

@@ -1,15 +1,11 @@
 import 'package:currency_mate_app/Utils/summary_card.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
-class SummaryScreen extends StatefulWidget {
-  const SummaryScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SummaryScreen> createState() => _SummaryScreenState();
-}
-
-class _SummaryScreenState extends State<SummaryScreen> {
+class SummaryScreen extends StatelessWidget {
+  SummaryScreen(this.res ,{super.key});
+  final Map<int,int> res;
   final notes = [5000,1000,500,100,50,20];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +27,11 @@ class _SummaryScreenState extends State<SummaryScreen> {
           child: ListView.builder(
             itemCount: notes.length,
             itemBuilder: (context, index) {
-              return SummaryCard(notes[index], index);
+              if(res[notes[index]] == null){
+                return SummaryCard(notes[index],0);
+              }else{
+                return SummaryCard(notes[index],res[notes[index]]!);
+              }
             },
           ),
         )

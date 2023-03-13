@@ -103,7 +103,7 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                         // return Text(res.toString());
                         return ElevatedButton.icon(
                             onPressed: (){
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) => SummaryScreen(res)),
                               );

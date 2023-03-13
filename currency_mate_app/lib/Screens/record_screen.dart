@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class RecordScreen extends StatefulWidget {
+  const RecordScreen({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _MainPageState createState() => _MainPageState();
+  _RecordScreenState createState() => _RecordScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _RecordScreenState extends State<RecordScreen> {
   DateTime _selectedDate = DateTime.now();
   int note5000 = 2;
   int note1000 = 2;

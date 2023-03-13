@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:currency_mate_app/Api/detection_api.dart';
+import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../Utils/style.dart';
 
 class DetectCurrency extends StatefulWidget {
@@ -17,11 +18,27 @@ class DetectCurrency extends StatefulWidget {
 class _DetectCurrencyState extends State<DetectCurrency> {
 
   File? pickedImage;
+  late Map<int,int> res;
+
+  _requestPermission() async{
+    PermissionStatus cameraStatus = await Permission.camera.request();
+    if(cameraStatus == PermissionStatus.granted){
+      _getImgFromCamera();
+    }
+    if(cameraStatus == PermissionStatus.permanentlyDenied){
+      openAppSettings();
+    }
+  }
+
+  _getDetection() async{
+    res = await DetectionApi.uploadImage(pickedImage);
+  }
+
 
   Future<void> _getImgFromCamera() async{
     final ImagePicker picker = ImagePicker();
     final XFile? photo = await picker.pickImage(
-      source: ImageSource.camera,
+      source: ImageSource.gallery,
       maxWidth: 1080,
       maxHeight: 1080,
     );
@@ -34,7 +51,6 @@ class _DetectCurrencyState extends State<DetectCurrency> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -56,21 +72,14 @@ class _DetectCurrencyState extends State<DetectCurrency> {
           Center(
             child: ElevatedButton(
               onPressed: () async{
-                PermissionStatus cameraStatus = await Permission.camera.request();
-                if(cameraStatus == PermissionStatus.granted){
-                  _getImgFromCamera();
-                }
-                if(cameraStatus == PermissionStatus.permanentlyDenied){
-                  openAppSettings();
-                }
-
+              _requestPermission();
               },
-              child: const Text("Click me"),
+              child: const Text("Upload"),
             ),
           ):
           Column(
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.width,
                 child: Image.file(
@@ -79,20 +88,32 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                 ),
               ),
               const Gap(20),
-              ElevatedButton.icon(
-                onPressed: () {  },
-                icon: const Icon(
-                  Icons.check,
-                  size: 50,
-                ),
-                label: const Text(
-                  "Proceed",
-                  style: TextStyle(
-                    fontSize: 30,
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: Center(
+                  child: FutureBuilder<dynamic>(
+                    future: _getDetection(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return const Text('Error loading data');
+                      } else {
+                        // return Text(res.toString());
+                        return ElevatedButton.icon(
+                            onPressed: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SummaryScreen(res)),
+                              );
+                            },
+                            icon: Icon(Icons.ice_skating),
+                            label: Text("Ok"),
+                        );
+                      }
+                    },
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10)
                 ),
               ),
             ],

@@ -45,8 +45,10 @@ class LoginScreen extends StatelessWidget {
 
                 controller: loginEmailController,
 
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
                   labelText: 'Email',
                 ),
               ),
@@ -61,8 +63,11 @@ class LoginScreen extends StatelessWidget {
                 controller: loginPasswordController,
 
                 obscureText: true,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
                   labelText: 'Password',
                 ),
               ),
@@ -87,7 +92,12 @@ class LoginScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
+                style: ElevatedButton.styleFrom(
+                    
+                    backgroundColor: const Color(0xff1D3557),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
+                )),
                 onPressed: ()async {
 
                   try{

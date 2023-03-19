@@ -1,3 +1,4 @@
+import 'package:currency_mate_app/Security/CredentialsStorage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,8 @@ import '../Utils/style.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'sign_in_screen.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -17,6 +20,23 @@ class _LoginScreenState extends State<LoginScreen>{
   final loginEmailController=TextEditingController();
   final loginPasswordController=TextEditingController();
   bool loading =false;
+  bool isLoggedIn=false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+  Future<void> checkLoginStatus() async {
+    FlutterSecureStorage storage=auth.storage;
+    await storage.read(key: 'isLoggedIn');
+    if (isLoggedIn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +132,8 @@ class _LoginScreenState extends State<LoginScreen>{
                       loading=true;
                     });
                     try{
+                      FlutterSecureStorage storage=auth.storage;
+                      await storage.write(key: 'isLoggedIn', value: 'true');
                       await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
                         Navigator.push(
                             context,
@@ -135,6 +157,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     'Login',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),),
+
               );
             }),
 
@@ -169,13 +192,6 @@ class _LoginScreenState extends State<LoginScreen>{
   }
 
 
-
   
-
-
-
-
-
-
 
 }

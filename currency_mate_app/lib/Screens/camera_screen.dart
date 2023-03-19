@@ -44,7 +44,9 @@ class _DetectCurrencyState extends State<DetectCurrency> {
     );
 
     setState(() {
-      pickedImage = File(photo!.path);
+      if(pickedImage != null){
+        pickedImage = File(photo!.path);
+      }
     });
   }
 

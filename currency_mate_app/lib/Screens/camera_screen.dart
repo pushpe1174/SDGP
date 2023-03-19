@@ -36,7 +36,7 @@ class _DetectCurrencyState extends State<DetectCurrency> {
 
   _setPicture(XFile photo) {
     setState(() {
-      pickedImage = File(photo!.path);
+      pickedImage = File(photo.path);
     });
   }
 
@@ -48,12 +48,10 @@ class _DetectCurrencyState extends State<DetectCurrency> {
       maxWidth: 1080,
       maxHeight: 1080,
     );
-
     if(photo != null){
       _setPicture(photo);
     }
   }
-
 
   @override
   void initState() {

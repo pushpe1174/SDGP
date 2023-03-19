@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class SummaryScreen extends StatelessWidget {
   SummaryScreen(this.res ,{super.key});
   final Map<int,int> res;
+
   final notes = [5000,1000,500,100,50,20];
 
   @override

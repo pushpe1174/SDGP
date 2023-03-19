@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "457421513993",
-    "project_id": "currency-mate",
-    "storage_bucket": "currency-mate.appspot.com"
+    "project_number": "506496492496",
+    "project_id": "pushpe123-5c975",
+    "storage_bucket": "pushpe123-5c975.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:457421513993:android:e806a77861fb7ab5d8dfd8",
+        "mobilesdk_app_id": "1:506496492496:android:96a829d6426fd56feccfd5",
         "android_client_info": {
           "package_name": "com.sdgp.currency_mate_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "457421513993-594jt81ebk1ekvm03hrbv3kfj2ef2298.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sdgp.currency_mate_app",
-            "certificate_hash": "52461ebbed90657ccb12b468d43aa65aa103d595"
-          }
-        },
-        {
-          "client_id": "457421513993-ljids61fvm2eebed6e94ddep545frl5b.apps.googleusercontent.com",
+          "client_id": "506496492496-3oeqr9uns9osbj4ge1r83cpjs3iq9b82.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3gt2GgyfgqISvcQt7XZ1yK8ksizMm0GA"
+          "current_key": "AIzaSyC9F0MQsCB0OgAEyAWmjtDlXd_Gz2fL-r4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "457421513993-ljids61fvm2eebed6e94ddep545frl5b.apps.googleusercontent.com",
+              "client_id": "506496492496-3oeqr9uns9osbj4ge1r83cpjs3iq9b82.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

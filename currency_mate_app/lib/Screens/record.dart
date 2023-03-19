@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_mate_app/Screens/recordmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +9,41 @@ import 'package:intl/intl.dart';
 
 class SelectDate extends StatefulWidget {
   const SelectDate({super.key});
+
+  static createRecord(Map<int, int> detect , sum) async {
+    // User? user = FirebaseAuth.instance.currentUser;
+    List<int> data_arr = [];
+    // int note5000 ;
+    int? note1000 ;
+    // int note500 ;
+    // int note100 ;
+    // int note50 ;
+    // int note20 ;
+
+    if(detect[1000] == null){
+      note1000 = 0;
+    }else{
+      note1000 = detect[1000];
+    }
+
+
+    final record = RecordModel(
+        // user as String,
+      "aS",
+        DateTime.now(),
+        0,
+        0,0,0,0,0,
+        sum
+    );
+
+    try {
+      DocumentReference docRef = await FirebaseFirestore.instance.collection('records').add(record.toJson());
+      print('Record added successfully with ID: ${docRef.id}');
+    } catch (e) {
+      print('Error adding record: $e');
+    }
+
+  }
 
   @override
   State<SelectDate> createState() => _SelectDateState();
@@ -206,7 +242,6 @@ class _SelectDateState extends State<SelectDate> {
                   child: TextButton(
                     onPressed: () {
                       //Navigator.pushNamed(context, '/second');
-                      createRecord();
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -234,21 +269,6 @@ class _SelectDateState extends State<SelectDate> {
         ),
       ),
     );
-  }
-
-  createRecord() async {
-    final record = RecordModel(
-      "ui.name",
-      DateTime.now(),
-      10000,
-      11,
-      4,
-      3,
-      2,
-      1,
-      0,
-    );
-    await FirebaseFirestore.instance.collection('records').add(record.toJson());
   }
 }
 

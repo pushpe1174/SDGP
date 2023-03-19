@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:currency_mate_app/Api/detection_api.dart';
+import 'package:currency_mate_app/Api/send_to_Database.dart';
 import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -122,7 +123,9 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                       } else {
                         // return Text(res.toString());
                         return ElevatedButton.icon(
-                            onPressed: (){
+                            onPressed: () async{
+                              SendToDatabase database = SendToDatabase(res);
+                              database.sendDatabase();
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) => SummaryScreen(res)),

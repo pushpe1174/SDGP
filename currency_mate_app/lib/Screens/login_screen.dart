@@ -22,21 +22,7 @@ class _LoginScreenState extends State<LoginScreen>{
   bool loading =false;
   bool isLoggedIn=false;
 
-  @override
-  void initState() {
-    super.initState();
-    checkLoginStatus();
-  }
-  Future<void> checkLoginStatus() async {
-    FlutterSecureStorage storage=auth.storage;
-    await storage.read(key: 'isLoggedIn');
-    if (isLoggedIn) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -132,8 +118,6 @@ class _LoginScreenState extends State<LoginScreen>{
                       loading=true;
                     });
                     try{
-                      FlutterSecureStorage storage=auth.storage;
-                      await storage.write(key: 'isLoggedIn', value: 'true');
                       await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
                         Navigator.push(
                             context,

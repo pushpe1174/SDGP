@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -39,10 +40,14 @@ class LoadingScreen extends StatelessWidget {
                             ),
                             const Gap(10),
 
-                            Text(
-                              "currencyMate".toUpperCase(),
-                              style: Style.loadingStyle,
-                            ),
+                            AnimatedTextKit(animatedTexts: [
+                              TypewriterAnimatedText(
+                                "currencyMate".toUpperCase(),
+                                textStyle: Style.loadingStyle,
+                                speed: const Duration(milliseconds: 200)
+                              )
+                            ],),
+
 
 
                             const Gap(25),
@@ -67,6 +72,7 @@ class LoadingScreen extends StatelessWidget {
 
       ),
     );
+
   }
 
 

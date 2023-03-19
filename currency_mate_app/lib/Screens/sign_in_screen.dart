@@ -82,48 +82,63 @@ class _SignupScreenState extends State<SignupScreen>{
             const SizedBox(
                 height: 20
             ),
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)
-                )),
-                onPressed: () async{
+            StatefulBuilder(builder: (context,setState){
+              return loading
+                  ? const LinearProgressIndicator()
+                  :Container(
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                    color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      )),
+                  onPressed: () async{
+                    setState((){
+                      loading=true;
+                    });
+                    try{
+                      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                        );
+                      });
 
-                  try{
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const HomeScreen())
+                    }on FirebaseAuthException catch (e){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content:Text(e.message.toString()),
+                            backgroundColor: Colors.red,)
                       );
+                    }
+
+                    setState((){
+                      loading=false;
                     });
 
-                  }on FirebaseAuthException catch (e){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content:Text(e.message.toString()),
-                          backgroundColor: Colors.red,)
-                    );
-                  }
-
-
-                },
-                child: const Text(
-                  'Sign-In',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),),
-            ),
-
+                  },
+                  child: const Text(
+                    'Sign-In',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),),
+              );
+            }),
             const SizedBox(
               height: 130,
             ),
+            
           ],
+
+
         ),
+
+
       ),
     );
+
+
   }
 
 

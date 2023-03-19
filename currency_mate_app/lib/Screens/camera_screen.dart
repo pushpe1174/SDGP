@@ -68,13 +68,25 @@ class _DetectCurrencyState extends State<DetectCurrency> {
       ),
       body: Column(
         children: [
+          Container(
+            color: Colors.lightBlue,
+            height: 400,
+            child: Center(
+              child: SizedBox(
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/uploadLogo.png')),
+            ),
+          ),
+          const SizedBox(height: 70),
           pickedImage == null?
           Center(
-            child: ElevatedButton(
+            child: ElevatedButton.icon(
               onPressed: () async{
               _requestPermission();
               },
-              child: const Text("Upload"),
+              icon: const Icon(Icons.upload),
+              label: const Text("Upload"),
             ),
           ):
           Column(
@@ -108,8 +120,8 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                                 MaterialPageRoute(builder: (context) => SummaryScreen(res)),
                               );
                             },
-                            icon: Icon(Icons.ice_skating),
-                            label: Text("Ok"),
+                            icon: const Icon(Icons.ice_skating),
+                            label: const Text("Ok"),
                         );
                       }
                     },

@@ -34,6 +34,12 @@ class _DetectCurrencyState extends State<DetectCurrency> {
     res = await DetectionApi.uploadImage(pickedImage);
   }
 
+  _setPicture(XFile photo) {
+    setState(() {
+      pickedImage = File(photo!.path);
+    });
+  }
+
 
   Future<void> _getImgFromCamera() async{
     final ImagePicker picker = ImagePicker();
@@ -43,11 +49,9 @@ class _DetectCurrencyState extends State<DetectCurrency> {
       maxHeight: 1080,
     );
 
-    setState(() {
-      if(pickedImage != null){
-        pickedImage = File(photo!.path);
-      }
-    });
+    if(photo != null){
+      _setPicture(photo);
+    }
   }
 
 

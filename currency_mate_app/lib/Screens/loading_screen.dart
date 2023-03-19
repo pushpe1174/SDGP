@@ -17,10 +17,6 @@ class LoadingScreen extends StatelessWidget {
       backgroundColor: Style.bgColor,
       body: Column(
         children: [
-          AppBar(
-            backgroundColor: const Color(0xff1D3557),
-          ),
-
           Expanded(
               child: SafeArea(
                 child: Padding(

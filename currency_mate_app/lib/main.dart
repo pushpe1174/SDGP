@@ -5,10 +5,8 @@ import 'package:currency_mate_app/Screens/loading_screen.dart';
 import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:currency_mate_app/Screens/record_screen.dart';
 import 'package:currency_mate_app/Screens/sign_in_screen.dart';
-import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() async{

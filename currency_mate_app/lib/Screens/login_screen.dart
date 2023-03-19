@@ -1,3 +1,4 @@
+import 'package:currency_mate_app/Security/CredentialsStorage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -5,12 +6,23 @@ import '../Utils/style.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'sign_in_screen.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+class _LoginScreenState extends State<LoginScreen>{
 
   final loginEmailController=TextEditingController();
   final loginPasswordController=TextEditingController();
+  bool loading =false;
+  bool isLoggedIn=false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +57,10 @@ class LoginScreen extends StatelessWidget {
 
                 controller: loginEmailController,
 
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
                   labelText: 'Email',
                 ),
               ),
@@ -61,8 +75,11 @@ class LoginScreen extends StatelessWidget {
                 controller: loginPasswordController,
 
                 obscureText: true,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
                   labelText: 'Password',
                 ),
               ),
@@ -81,37 +98,53 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-                onPressed: ()async {
+            StatefulBuilder(builder: (context,setState){
+              return loading
+                  ?const LinearProgressIndicator()
+                  :Container(
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                    color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
 
-                  try{
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const HomeScreen())
-                      );
+                      backgroundColor: const Color(0xff1D3557),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      )),
+                  onPressed: ()async {
+                    setState((){
+                      loading=true;
                     });
-                  }on FirebaseAuthException catch (e){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content:Text(e.message.toString()),
-                        backgroundColor: Colors.red,)
-                    );
-                  }
+                    try{
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                        );
+                      });
+                    }on FirebaseAuthException catch (e){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content:Text(e.message.toString()),
+                            backgroundColor: Colors.red,)
+                      );
+                    }
+
+                    setState((){
+                      loading=false;
+                    });
 
 
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),),
 
-                },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),),
-            ),
+              );
+            }),
+
 
             const SizedBox(
               height: 130,
@@ -141,4 +174,8 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+
+  
+
 }

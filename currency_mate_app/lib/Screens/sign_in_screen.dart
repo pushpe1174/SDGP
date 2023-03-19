@@ -2,10 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   SignupScreen({Key? key}) : super(key: key);
+
+
+  @override
+  _SignupScreenState createState() => _SignupScreenState();
+}
+
+
+class _SignupScreenState extends State<SignupScreen>{
+
   final signupEmailController=TextEditingController();
   final signupPasswordController=TextEditingController();
+  bool loading=false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +32,7 @@ class SignupScreen extends StatelessWidget {
         child: Column(
           children:[
             Padding(
-              padding: const EdgeInsets.only(top: 60.0),
+              padding: const EdgeInsets.only(top: 80.0),
               child: Center(
                 child: SizedBox(
                     width: 200,
@@ -30,16 +40,22 @@ class SignupScreen extends StatelessWidget {
                     child: Image.asset('assets/SplashLogo.png')),
               ),
             ),
-
-             Padding(
+            const SizedBox(
+                height: 70
+            ),
+            Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
 
                 controller: signupEmailController,
 
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration:  InputDecoration(
+
+                  border: OutlineInputBorder(
+                     borderRadius: BorderRadius.circular(10.0)
+
+                  ),
                   labelText: 'Email',
                 ),
               ),
@@ -54,8 +70,10 @@ class SignupScreen extends StatelessWidget {
                 controller: signupPasswordController,
 
                 obscureText: true,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration:  InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
                   labelText: 'Password',
                 ),
               ),
@@ -64,44 +82,65 @@ class SignupScreen extends StatelessWidget {
             const SizedBox(
                 height: 20
             ),
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-                onPressed: () async{
+            StatefulBuilder(builder: (context,setState){
+              return loading
+                  ? const LinearProgressIndicator()
+                  :Container(
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                    color: const Color(0xff1D3557),borderRadius: BorderRadius.circular(20)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      )),
+                  onPressed: () async{
+                    setState((){
+                      loading=true;
+                    });
+                    try{
+                      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                        );
+                      });
 
-                  try{
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const HomeScreen())
+                    }on FirebaseAuthException catch (e){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content:Text(e.message.toString()),
+                            backgroundColor: Colors.red,)
                       );
+                    }
+
+                    setState((){
+                      loading=false;
                     });
 
-                  }on FirebaseAuthException catch (e){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content:Text(e.message.toString()),
-                          backgroundColor: Colors.red,)
-                    );
-                  }
-
-
-                },
-                child: const Text(
-                  'Sign-in',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),),
-            ),
-
+                  },
+                  child: const Text(
+                    'Sign-In',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),),
+              );
+            }),
             const SizedBox(
               height: 130,
             ),
+            
           ],
+
+
         ),
+
+
       ),
     );
+
+
   }
+
+
+  
 }

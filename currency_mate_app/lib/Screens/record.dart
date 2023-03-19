@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_mate_app/Screens/recordmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:intl/intl.dart';
-import 'package:record/recordmodel.dart';
+
 
 
 class SelectDate extends StatefulWidget {

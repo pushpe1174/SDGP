@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_mate_app/Screens/recordmodel.dart';
 import 'package:get/get.dart';
-import 'package:record/recordmodel.dart';
+
 
 class RecordRepository extends GetxController {
   static RecordRepository get to => Get.find();

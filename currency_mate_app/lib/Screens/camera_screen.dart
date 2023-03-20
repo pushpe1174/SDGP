@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:currency_mate_app/Api/detection_api.dart';
+import 'package:currency_mate_app/Api/send_to_Database.dart';
 import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -31,7 +32,20 @@ class _DetectCurrencyState extends State<DetectCurrency> {
   }
 
   _getDetection() async{
-    res = await DetectionApi.uploadImage(pickedImage);
+    res = await DetectionApi.uploadImage(pickedImage!);
+  }
+
+  _setPicture(XFile photo) {
+    setState(() {
+      pickedImage = File(photo.path);
+    });
+  }
+
+  _nextScreen(){
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SummaryScreen(res)),
+    );
   }
 
 
@@ -42,12 +56,10 @@ class _DetectCurrencyState extends State<DetectCurrency> {
       maxWidth: 1080,
       maxHeight: 1080,
     );
-
-    setState(() {
-      pickedImage = File(photo!.path);
-    });
+    if(photo != null){
+      _setPicture(photo);
+    }
   }
-
 
   @override
   void initState() {
@@ -116,13 +128,11 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                       } else if (snapshot.hasError) {
                         return const Text('Error loading data');
                       } else {
-                        // return Text(res.toString());
                         return ElevatedButton.icon(
-                            onPressed: (){
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => SummaryScreen(res)),
-                              );
+                            onPressed: () async{
+                              SendToDatabase database = SendToDatabase(res);
+                              await database.sendDatabase();
+                              _nextScreen();
                             },
                             icon: const Icon(Icons.ice_skating),
                             label: const Text("Ok"),

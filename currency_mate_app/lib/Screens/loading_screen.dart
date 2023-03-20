@@ -9,18 +9,10 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
     return Scaffold(
       backgroundColor: Style.bgColor,
       body: Column(
         children: [
-          AppBar(
-            backgroundColor: const Color(0xff1D3557),
-          ),
-
           Expanded(
               child: SafeArea(
                 child: Padding(
@@ -28,11 +20,9 @@ class LoadingScreen extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
                             Center(
                                 child: Image.asset(
                                     'assets/SplashLogo.png'
@@ -47,9 +37,6 @@ class LoadingScreen extends StatelessWidget {
                                 speed: const Duration(milliseconds: 200)
                               )
                             ],),
-
-
-
                             const Gap(25),
                             const SpinKitCircle(
                               color: Color(0xff9EC359),

@@ -76,7 +76,9 @@ class HomeScreen extends StatelessWidget {
                 width: 300,
                 height: 180,
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/record');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(

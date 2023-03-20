@@ -1,3 +1,4 @@
+import 'package:currency_mate_app/Security/CredentialsStorage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,8 @@ import '../Utils/style.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
 import 'sign_in_screen.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -17,6 +20,9 @@ class _LoginScreenState extends State<LoginScreen>{
   final loginEmailController=TextEditingController();
   final loginPasswordController=TextEditingController();
   bool loading =false;
+  bool isLoggedIn=false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +141,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     'Login',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),),
+
               );
             }),
 
@@ -169,13 +176,6 @@ class _LoginScreenState extends State<LoginScreen>{
   }
 
 
-
   
-
-
-
-
-
-
 
 }

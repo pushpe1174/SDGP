@@ -32,7 +32,7 @@ class _DetectCurrencyState extends State<DetectCurrency> {
   }
 
   _getDetection() async{
-    res = await DetectionApi.uploadImage(pickedImage);
+    res = await DetectionApi.uploadImage(pickedImage!);
   }
 
   _setPicture(XFile photo) {

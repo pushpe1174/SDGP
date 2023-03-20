@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 class RecordRepository extends GetxController {
   static RecordRepository get to => Get.find();
 
-  final _record = FirebaseFirestore.instance;
+  static final _record = FirebaseFirestore.instance;
 
-  createRecord(UserRecord record) async {
+  static createRecord(UserRecord record) async {
     await _record.collection('records').add(record.toJson());
   }
 
-  Future<UserRecord> getRecord(DateTime selectedDate) async {
+  static Future<UserRecord> getRecord(DateTime selectedDate) async {
     final doc = await _record
         .collection('records')
         .where("date", isEqualTo: selectedDate)

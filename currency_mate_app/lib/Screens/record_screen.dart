@@ -45,7 +45,6 @@ class _PreviousRecordState extends State<PreviousRecord> {
             itemBuilder: (BuildContext context, int index) {
               final document = filteredDocuments[index];
               Map<int,int> getMapData = _convertMap(document);
-              // print('${document['sum']}');
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -156,7 +155,7 @@ class _PreviousRecordState extends State<PreviousRecord> {
                           ),
                         ),
                         controller: TextEditingController(
-                          text: '   ${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                          text: '      ${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                         ),
                         onTap: _setDate,
                       ),
@@ -165,41 +164,51 @@ class _PreviousRecordState extends State<PreviousRecord> {
                 ),
                 Expanded(
                   flex: 6,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFe6e6e6),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 10 ,
-                        vertical: 20 ,
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 253, 254, 228),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          margin: const EdgeInsets.fromLTRB(10, 8, 10,8),
-                          width: MediaQuery.of(context).size.width-20,
-                          height:MediaQuery.of(context).size.height-250 ,
-                          child: SingleChildScrollView(
-                            child: StreamBuilder<QuerySnapshot>(
-                              stream: FirebaseFirestore.instance.collection('records').snapshots(),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                  return const CircularProgressIndicator();
-                                } else if (snapshot.hasError) {
-                                  return const Text('Error loading data');
-                                }else{
-                                  return _documentData(snapshot);
-                                }
-                              },
+                  child: SingleChildScrollView(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE6E6E6),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 3,
+                          vertical: 8,
+                      ),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 20,
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 253, 254, 228),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 3,
+                                vertical: 5,
+                            ),
+                            margin: const EdgeInsets.fromLTRB(10, 8, 10, 10),
+                            width: MediaQuery.of(context).size.width-20,
+                            height:MediaQuery.of(context).size.height-300 ,
+                            child: SingleChildScrollView(
+                              child: StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance.collection('records').snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                    return const CircularProgressIndicator();
+                                  } else if (snapshot.hasError) {
+                                    return const Text('Error loading data');
+                                  }else{
+                                    return _documentData(snapshot);
+                                  }
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

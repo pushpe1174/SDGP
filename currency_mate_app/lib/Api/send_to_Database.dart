@@ -7,7 +7,7 @@ class SendToDatabase{
   SendToDatabase(this.detect);
 
   sendDatabase() async {
-    for (int i =0; i<notes.length; i<6) {
+    for (int i = 0; i < notes.length; i++) {
       if (detect[notes[i]] == null) {
         total += 0;
       } else {
@@ -15,8 +15,8 @@ class SendToDatabase{
         int noteAmount = detect[notes[i]]!;
         total += noteValue * noteAmount;
       }
-      await SelectDate.createRecord(detect, total);
     }
+    await SelectDate.createRecord(detect, total);
   }
 
 }

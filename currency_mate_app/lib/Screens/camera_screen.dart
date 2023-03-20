@@ -41,6 +41,13 @@ class _DetectCurrencyState extends State<DetectCurrency> {
     });
   }
 
+  _nextScreen(){
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SummaryScreen(res)),
+    );
+  }
+
 
   Future<void> _getImgFromCamera() async{
     final ImagePicker picker = ImagePicker();
@@ -121,15 +128,11 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                       } else if (snapshot.hasError) {
                         return const Text('Error loading data');
                       } else {
-                        // return Text(res.toString());
                         return ElevatedButton.icon(
                             onPressed: () async{
                               SendToDatabase database = SendToDatabase(res);
-                              database.sendDatabase();
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => SummaryScreen(res)),
-                              );
+                              await database.sendDatabase();
+                              _nextScreen();
                             },
                             icon: const Icon(Icons.ice_skating),
                             label: const Text("Ok"),

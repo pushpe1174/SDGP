@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_mate_app/Screens/recordmodel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:intl/intl.dart';
@@ -10,30 +9,29 @@ import 'package:intl/intl.dart';
 class SelectDate extends StatefulWidget {
   const SelectDate({super.key});
 
+
   static createRecord(Map<int, int> detect , sum) async {
     // User? user = FirebaseAuth.instance.currentUser;
-    List<int> data_arr = [];
-    // int note5000 ;
-    int? note1000 ;
-    // int note500 ;
-    // int note100 ;
-    // int note50 ;
-    // int note20 ;
-
-    if(detect[1000] == null){
-      note1000 = 0;
-    }else{
-      note1000 = detect[1000];
+    final notes = [5000,1000,500,100,50,20];
+    List<int> noteAmount = [];
+    for (int note in notes) {
+      int value = detect[note] == null ? 0 : detect[note]!;
+      noteAmount.add(value);
     }
 
+    // print(noteAmount.toString());
 
     final record = RecordModel(
         // user as String,
       "aS",
         DateTime.now(),
-        0,
-        0,0,0,0,0,
-        sum
+        sum,
+        noteAmount[0],
+        noteAmount[1],
+        noteAmount[2],
+        noteAmount[3],
+        noteAmount[4],
+        noteAmount[5]
     );
 
     try {

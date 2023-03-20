@@ -8,7 +8,8 @@ import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'Screens/record.dart';
+import 'Screens/record_screen.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,10 +32,10 @@ class MyApp extends StatelessWidget {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),
         '/detect_currency':(context)=> const DetectCurrency(),
-        '/login':(context)=>  LoginScreen(),
+        '/login':(context)=>  const LoginScreen(),
         '/sign_in':(context)=>  SignupScreen(),
         '/forgot_password':(context)=>   ForgotPassword(),
-        '/record':(context)=>   const SelectDate(),
+        '/record':(context)=>   const PreviousRecord(),
       },
     );
   }

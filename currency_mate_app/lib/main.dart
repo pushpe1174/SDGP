@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/record.dart';
+import 'Screens/record_screen_make.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/home' ,
+      initialRoute: '/record' ,
       routes: {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/login':(context)=>  LoginScreen(),
         '/sign_in':(context)=>  SignupScreen(),
         '/forgot_password':(context)=>   ForgotPassword(),
-        '/record':(context)=>   const SelectDate(),
+        '/record':(context)=>   const PreviousRecord(),
       },
     );
   }

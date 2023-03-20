@@ -1,63 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:currency_mate_app/Screens/recordmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:intl/intl.dart';
 
+import '../Utils/style.dart';
 
-
-class SelectDate extends StatefulWidget {
-  const SelectDate({super.key});
-
-
-  static createRecord(Map<int, int> detect , sum) async {
-    // User? user = FirebaseAuth.instance.currentUser;
-    final notes = [5000,1000,500,100,50,20];
-    List<int> noteAmount = [];
-    for (int note in notes) {
-      int value = detect[note] == null ? 0 : detect[note]!;
-      noteAmount.add(value);
-    }
-
-    // print(noteAmount.toString());
-
-    final record = RecordModel(
-        // user as String,
-      "aS",
-        DateTime.now(),
-        sum,
-        noteAmount[0],
-        noteAmount[1],
-        noteAmount[2],
-        noteAmount[3],
-        noteAmount[4],
-        noteAmount[5]
-    );
-
-    try {
-      DocumentReference docRef = await FirebaseFirestore.instance.collection('records').add(record.toJson());
-      print('Record added successfully with ID: ${docRef.id}');
-    } catch (e) {
-      print('Error adding record: $e');
-    }
-
-  }
-
+class ViewPreviousRecord extends StatefulWidget {
+  const ViewPreviousRecord({super.key});
   @override
-  State<SelectDate> createState() => _SelectDateState();
+  State<ViewPreviousRecord> createState() => _ViewPreviousRecordState();
 }
 
-class _SelectDateState extends State<SelectDate> {
-  DateTime _selectedDate = DateTime.now();
+class _ViewPreviousRecordState extends State<ViewPreviousRecord> {
+  DateTime selectedDate = DateTime.now();
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Choose Records'),
-        backgroundColor: const Color(0xFF1D3557),
-      ),
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+              'Records',
+            style: Style.headingStyle,
+          ),
+          backgroundColor: const Color(0xFF1D3557),
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: Container(
           color: const Color(0xFFF1FAEE),
           child: Column(children: [
             Expanded(
@@ -67,23 +37,14 @@ class _SelectDateState extends State<SelectDate> {
                   color: const Color(0xFFe6e6e6),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                margin: const EdgeInsets.fromLTRB(20, 8, 20, 3),
-                padding: const EdgeInsets.fromLTRB(8, 15, 8, 20),
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 65),
+                padding: const EdgeInsets.fromLTRB(15, 12, 15,0),
                 alignment: Alignment.topCenter,
                 child: SingleChildScrollView(
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      const Text(
-                        "Previous Records",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF442F24),
-                        ),
-                      ),
                       Container(
-                        alignment: Alignment.bottomLeft,
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 2),
                       ),
                       Container(
@@ -93,7 +54,7 @@ class _SelectDateState extends State<SelectDate> {
                           decoration: const InputDecoration(
                             labelText: 'Select a Date',
                             labelStyle: TextStyle(
-                              fontSize: 12,
+                              fontSize: 24,
                               fontWeight: FontWeight.w500,
                               color: Color(0xFF442F24),
                             ),
@@ -106,18 +67,18 @@ class _SelectDateState extends State<SelectDate> {
                           ),
                           controller: TextEditingController(
                             text:
-                            'Date    ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
+                            'Date    ${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                           ),
                           onTap: () async {
                             final DateTime? picked = await showDatePicker(
                               context: context,
-                              initialDate: _selectedDate,
+                              initialDate: selectedDate,
                               firstDate: DateTime(2022),
                               lastDate: DateTime.now(),
                             );
-                            if (picked != null && picked != _selectedDate) {
+                            if (picked != null && picked != selectedDate) {
                               setState(() {
-                                _selectedDate = picked;
+                                selectedDate = picked;
                               });
                             }
                           },
@@ -175,9 +136,9 @@ class _SelectDateState extends State<SelectDate> {
                             final filteredDocuments = documents.where((document) {  //filter the records by date
                               //filter the records by user id
                               final documentDate = document['date'].toDate();
-                              return documentDate.year == _selectedDate.year &&
-                                  documentDate.month == _selectedDate.month &&
-                                  documentDate.day == _selectedDate.day;
+                              return documentDate.year == selectedDate.year &&
+                                  documentDate.month == selectedDate.month &&
+                                  documentDate.day == selectedDate.day;
                             }).toList();
                             return Column(
                               children: [
@@ -230,39 +191,6 @@ class _SelectDateState extends State<SelectDate> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 50,
-                  margin: const EdgeInsets.fromLTRB(20, 3, 20, 20),
-                  child: TextButton(
-                    onPressed: () {
-                      //Navigator.pushNamed(context, '/second');
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFF1D3557),
-                      ),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      "OK",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ]),
         ),
       ),
@@ -281,8 +209,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  FlutterTts flutterTts = FlutterTts();
-
   final CollectionReference collectionRef =
       FirebaseFirestore.instance.collection('records');
   final DateTime now = DateTime.now();
@@ -294,18 +220,6 @@ class _MainPageState extends State<MainPage> {
   int note50 = 2;
   int note20 = 2;
   int sum = 0;
-
-  void initSetting() async {
-    await flutterTts.setVolume(1.0);
-    await flutterTts.setPitch(1.0);
-    await flutterTts.setSpeechRate(0.1);
-    await flutterTts.setLanguage("en-US");
-  }
-
-  void _speak() async {
-    initSetting();
-    await flutterTts.speak('2500');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -805,7 +719,7 @@ class _MainPageState extends State<MainPage> {
                   height: 60,
                   child: FloatingActionButton(
                     backgroundColor: const Color(0xFF1D3557),
-                    onPressed: () => flutterTts.speak('the sum is ${data['sum'] ?? ''}'),
+                    onPressed: () {},
                     child: const Icon(
                       Icons.volume_up_sharp,
                       size: 40,

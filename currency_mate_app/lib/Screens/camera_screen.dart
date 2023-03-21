@@ -130,31 +130,34 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
-                const Gap(20),
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Center(
-                    child: FutureBuilder<dynamic>(
-                      future: _getDetection(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return const Text('Error loading data');
-                        } else {
-                          return ElevatedButton.icon(
+                const Gap(40),
+                Center(
+                  child: FutureBuilder<dynamic>(
+                    future: _getDetection(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return const Text('Error loading data');
+                      } else {
+                        return SizedBox(
+                          width: 200,
+                          height: 50,
+                          child: ElevatedButton.icon(
                               onPressed: () async{
                                 SendToDatabase database = SendToDatabase(res);
                                 await database.sendDatabase();
                                 _nextScreen();
                               },
-                              icon: const Icon(Icons.ice_skating),
-                              label: const Text("Ok"),
-                          );
-                        }
-                      },
-                    ),
+                              icon: const Icon(Icons.check),
+                              label: Text(
+                                  "Proceed",
+                                style: Style.numberStyle3,
+                              ),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
               ],

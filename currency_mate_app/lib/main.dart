@@ -7,7 +7,6 @@ import 'package:currency_mate_app/Screens/sign_in_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'Screens/record_screen.dart';
 
 

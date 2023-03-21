@@ -23,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen>{
       backgroundColor: const Color(0xffF1FAEE),
 
       appBar: AppBar(
-        title: const Text("Sign-up Page"),
+        title: const Text("Sign-In Page"),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),

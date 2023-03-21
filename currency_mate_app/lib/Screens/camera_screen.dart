@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:currency_mate_app/Api/detection_api.dart';
-import 'package:currency_mate_app/Api/send_to_Database.dart';
+import 'package:currency_mate_app/Api/send_to_database.dart';
 import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

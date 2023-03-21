@@ -2,6 +2,7 @@ import 'package:currency_mate_app/Utils/get_total.dart';
 import 'package:currency_mate_app/Utils/summary_card.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 class SummaryScreen extends StatefulWidget {
   const SummaryScreen(this.res ,{super.key});
   final Map<int,int> res;
@@ -13,6 +14,15 @@ class SummaryScreen extends StatefulWidget {
 class _SummaryScreenState extends State<SummaryScreen> {
   int total = 0;
   final notes = [5000,1000,500,100,50,20];
+  final FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async{
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setVolume(1.0);
+    await flutterTts.speak(text);
+  }
 
   _getTotal(){
     total = GetTotal.getTotal(widget.res);
@@ -96,8 +106,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   height: 60,
                   child: FloatingActionButton(
                     backgroundColor: const Color(0xFF1D3557),
-                    //onPressed: () => flutterTts.speak('the sum is ${data['sum'] ?? ''}'),
-                    onPressed: () {  },
+                    onPressed: () => _speak("Total amount is $total"),
                     child: const Icon(
                       Icons.volume_up_sharp,
                       size: 40,

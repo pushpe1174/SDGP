@@ -5,6 +5,7 @@ import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../Utils/style.dart';
 
@@ -19,6 +20,18 @@ class _DetectCurrencyState extends State<DetectCurrency> {
 
   File? pickedImage;
   late Map<int,int> res;
+  bool _isLoading = false;
+
+  Future<void> _sendDataToDatabase(Map<int, int> res) async {
+    SendToDatabase database = SendToDatabase(res);
+    setState(() {
+      _isLoading = true; // Set loading state to true
+    });
+    await database.sendDatabase();
+    setState(() {
+      _isLoading = false; // Set loading state to false
+    });
+  }
 
   _requestPermission() async{
     PermissionStatus cameraStatus = await Permission.camera.request();
@@ -136,24 +149,26 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                     future: _getDetection(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
+                        return LoadingAnimationWidget.beat(
+                            color: const Color(0xff1D3557),
+                            size: 50,
+                        );
                       } else if (snapshot.hasError) {
                         return const Text('Error loading data');
                       } else {
                         return SizedBox(
                           width: 200,
                           height: 50,
-                          child: ElevatedButton.icon(
-                              onPressed: () async{
-                                SendToDatabase database = SendToDatabase(res);
-                                await database.sendDatabase();
-                                _nextScreen();
-                              },
-                              icon: const Icon(Icons.check),
-                              label: Text(
-                                  "Proceed",
-                                style: Style.numberStyle3,
-                              ),
+                          child:  ElevatedButton.icon(
+                            onPressed: () async{
+                              await _sendDataToDatabase(res);
+                              _nextScreen();
+                            },
+                            icon: const Icon(Icons.check),
+                            label: Text(
+                              "Proceed",
+                              style: Style.numberStyle3,
+                            ),
                           ),
                         );
                       }

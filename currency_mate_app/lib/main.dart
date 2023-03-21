@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/home' ,
+      initialRoute: '/record' ,
       routes: {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),

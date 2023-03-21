@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme:ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/upload_currency',
+      initialRoute: '/home',
       routes: {
         '/loading':(context)=> const LoadingScreen(),
         '/home':(context)=> const HomeScreen(),
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         '/sign_in':(context)=>  SignupScreen(),
         '/forgot_password':(context)=>   ForgotPassword(),
         '/record':(context)=>   const PreviousRecord(),
-        'upload_currency': (context) => const UploadCurrency(),
+        '/upload_currency': (context) => const UploadCurrency(),
       },
     );
   }

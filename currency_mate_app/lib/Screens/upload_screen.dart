@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Utils/style.dart';
 
@@ -58,19 +59,12 @@ class _UploadCurrencyState extends State<UploadCurrency> {
             ),
             Row(
               children: [
+                const Gap(20),
                 Expanded(
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-                    onPressed: ()=> getImage(source: ImageSource.camera),
-                    child: const Text('Capture Image', style: TextStyle(fontSize: 20))
-                    ),
-                ),
-                const SizedBox(width: 20,),
-                Expanded(
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff1D3557)),
-                      onPressed: ()=> getImage(source: ImageSource.gallery),
-                      child: const Text('Select Image', style: TextStyle(fontSize: 20))
+                      onPressed: ()=> getImage(source: ImageSource.camera),
+                      child: const Text('Open camera', style: TextStyle(fontSize: 20))
                     ),
                 )
               ],

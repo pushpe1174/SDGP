@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_mate_app/Utils/get_total.dart';
 
 import '../Model/user_record.dart';
 
@@ -9,15 +10,7 @@ class SendToDatabase{
   SendToDatabase(this.detect);
 
   sendDatabase() async {
-    for (int i = 0; i < notes.length; i++) {
-      if (detect[notes[i]] == null) {
-        total += 0;
-      } else {
-        int noteValue = notes[i];
-        int noteAmount = detect[notes[i]]!;
-        total += noteValue * noteAmount;
-      }
-    }
+    total = GetTotal.getTotal(detect);
     await _createRecord(detect, total);
   }
 

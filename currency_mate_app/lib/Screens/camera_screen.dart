@@ -1,11 +1,11 @@
 import 'dart:io';
-
 import 'package:currency_mate_app/Api/detection_api.dart';
 import 'package:currency_mate_app/Api/send_to_database.dart';
 import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../Utils/style.dart';
 
@@ -20,6 +20,18 @@ class _DetectCurrencyState extends State<DetectCurrency> {
 
   File? pickedImage;
   late Map<int,int> res;
+  bool _isLoading = false;
+
+  Future<void> _sendDataToDatabase(Map<int, int> res) async {
+    SendToDatabase database = SendToDatabase(res);
+    setState(() {
+      _isLoading = true; // Set loading state to true
+    });
+    await database.sendDatabase();
+    setState(() {
+      _isLoading = false; // Set loading state to false
+    });
+  }
 
   _requestPermission() async{
     PermissionStatus cameraStatus = await Permission.camera.request();
@@ -78,73 +90,95 @@ class _DetectCurrencyState extends State<DetectCurrency> {
         backgroundColor: const Color(0xff1D3557),
         elevation: 0,
       ),
-      body: Column(
-        children: [
-      pickedImage == null?
-      Column(
-            children: [
-              Container(
-                color: Colors.lightBlue,
-                height: 400,
-                child: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+        pickedImage == null?
+        Column(
+              children: [
+                Container(
+                  width: 640,
+                  height: 480,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    border: Border.all(width: 7, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: const Icon(Icons.photo),
+                ),
+                const Gap(40),
+                Center(
                   child: SizedBox(
-                      width: 200,
-                      height: 150,
-                      child: Image.asset('assets/uploadLogo.png')),
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      onPressed: () async{
+                        _requestPermission();
+                      },
+                      icon: const Icon(Icons.upload),
+                      label: Text(
+                          "Upload",
+                        style: Style.numberStyle3,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ) :
+            Column(
+              children: [
+                Container(
+                  width: 640,
+                  height: 480,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    image: DecorationImage(
+                        image: FileImage(pickedImage!),
+                        fit: BoxFit.cover
+                    ),
+                    border: Border.all(width: 2, color: Colors.black),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
                 ),
-              ),
-              const Gap(70),
-              Center(
-                child: ElevatedButton.icon(
-                  onPressed: () async{
-                    _requestPermission();
-                  },
-                  icon: const Icon(Icons.upload),
-                  label: const Text("Upload"),
-                ),
-              )
-            ],
-          ) :
-          Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width,
-                child: Image.file(
-                  pickedImage!,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              const Gap(20),
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: Center(
+                const Gap(40),
+                Center(
                   child: FutureBuilder<dynamic>(
                     future: _getDetection(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
+                        return LoadingAnimationWidget.beat(
+                            color: const Color(0xff1D3557),
+                            size: 50,
+                        );
                       } else if (snapshot.hasError) {
                         return const Text('Error loading data');
                       } else {
-                        return ElevatedButton.icon(
+                        return SizedBox(
+                          width: 200,
+                          height: 50,
+                          child:  ElevatedButton.icon(
                             onPressed: () async{
-                              SendToDatabase database = SendToDatabase(res);
-                              await database.sendDatabase();
+                              await _sendDataToDatabase(res);
                               _nextScreen();
                             },
-                            icon: const Icon(Icons.ice_skating),
-                            label: const Text("Ok"),
+                            icon: const Icon(Icons.check),
+                            label: Text(
+                              "Proceed",
+                              style: Style.numberStyle3,
+                            ),
+                          ),
                         );
                       }
                     },
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

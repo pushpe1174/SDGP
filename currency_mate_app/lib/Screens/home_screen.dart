@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(onPressed:() async{
             await FirebaseAuth.instance.signOut().then((value) {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) =>LoginScreen())
+                MaterialPageRoute(builder: (context) => const LoginScreen())
               );
             });
           },
@@ -107,7 +107,9 @@ class HomeScreen extends StatelessWidget {
                 width: 300,
                 height: 180,
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/upload_currency');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
@@ -124,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       Text(
-                        "Upload Currency",
+                        "Camera",
                         style: Style.headingStyle2,
                       )
                     ],

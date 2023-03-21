@@ -18,7 +18,7 @@ class _UploadCurrencyState extends State<UploadCurrency> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Currency', style: Style.headingStyle),
+        title: Text('Camera', style: Style.headingStyle),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),

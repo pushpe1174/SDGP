@@ -3,13 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Utils/style.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: UploadCurrency(),
-  ));
-}
-
 class UploadCurrency extends StatefulWidget {
   const UploadCurrency({Key? key}) : super(key : key);
 

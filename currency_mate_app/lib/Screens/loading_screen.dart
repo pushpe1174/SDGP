@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,6 +10,14 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 4),(){
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen())
+      );
+    });
+
+
     return Scaffold(
       backgroundColor: Style.bgColor,
       body: Column(

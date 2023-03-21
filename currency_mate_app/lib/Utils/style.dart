@@ -36,5 +36,10 @@ class Style{
       fontWeight: FontWeight.bold,
       color: Colors.black,
   );
+  static TextStyle numberStyle2 = GoogleFonts.inter(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
 
 }

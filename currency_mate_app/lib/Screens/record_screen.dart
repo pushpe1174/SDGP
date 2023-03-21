@@ -72,7 +72,7 @@ class _PreviousRecordState extends State<PreviousRecord> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 DateFormat('H:mm:ss').format(document['date'].toDate()),
-                                style: Style.numberStyle,
+                                style: Style.numberStyle2,
                               ),
                             ),
                           ),
@@ -81,7 +81,7 @@ class _PreviousRecordState extends State<PreviousRecord> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 'Rs. ${document['total']}',
-                                style: Style.numberStyle,
+                                style: Style.numberStyle2,
                               ),
                             ),
                           ),

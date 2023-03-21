@@ -1,11 +1,28 @@
+import 'package:currency_mate_app/Utils/get_total.dart';
 import 'package:currency_mate_app/Utils/summary_card.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
-class SummaryScreen extends StatelessWidget {
-  SummaryScreen(this.res ,{super.key});
+class SummaryScreen extends StatefulWidget {
+  const SummaryScreen(this.res ,{super.key});
   final Map<int,int> res;
 
+  @override
+  State<SummaryScreen> createState() => _SummaryScreenState();
+}
+
+class _SummaryScreenState extends State<SummaryScreen> {
+  int total = 0;
   final notes = [5000,1000,500,100,50,20];
+
+  _getTotal(){
+    total = GetTotal.getTotal(widget.res);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +49,10 @@ class SummaryScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: notes.length,
                   itemBuilder: (context, index) {
-                    if(res[notes[index]] == null){
+                    if(widget.res[notes[index]] == null){
                       return SummaryCard(notes[index],0);
                     }else{
-                      return SummaryCard(notes[index],res[notes[index]]!);
+                      return SummaryCard(notes[index],widget.res[notes[index]]!);
                     }
                   },
                 ),
@@ -51,8 +68,8 @@ class SummaryScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(8, 15, 8, 15),
                   alignment: Alignment.topCenter,
                   child: Column(
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Total Amount",
                         style: TextStyle(
                           fontSize: 20,
@@ -61,8 +78,8 @@ class SummaryScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Rs. 2500",
-                        style: TextStyle(
+                        "Rs. $total",
+                        style: const TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.w900,
                           color: Color(0xFF442F24),

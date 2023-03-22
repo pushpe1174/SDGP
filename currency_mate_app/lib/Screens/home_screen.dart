@@ -1,6 +1,7 @@
 import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:currency_mate_app/Service/auth_service.dart';
 import 'package:currency_mate_app/Utils/style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -11,7 +12,22 @@ class HomeScreen extends StatefulWidget{
   HomeScreenState createState() => HomeScreenState();
 }
 class HomeScreenState extends State<HomeScreen>{
-  AuthClass authClass = AuthClass();
+  late AuthClass authClass;
+
+  _printUserID(){
+    authClass = AuthClass();
+    print(FirebaseAuth.instance.currentUser?.uid.toString());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _printUserID();
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

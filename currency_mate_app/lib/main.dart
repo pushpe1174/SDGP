@@ -22,9 +22,9 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   AuthClass authClass=AuthClass();
   Widget currentPage=const LoginScreen();
 
@@ -39,9 +39,8 @@ class _MyAppState extends State<MyApp> {
     String? token=await authClass.getToken();
     if(token!=null){
       setState(() {
-        currentPage= HomeScreen();
+        currentPage= const HomeScreen();
       });
-
     }
   }
   @override
@@ -52,14 +51,14 @@ class _MyAppState extends State<MyApp> {
         primaryColor: primary,
 
       ),
-      initialRoute: '/currentpage',
+      initialRoute: '/current_page',
       routes: {
-        '/currentpage':(context)=>currentPage,
+        '/current_page':(context)=> currentPage,
         '/loading': (context) => const LoadingScreen(),
-        '/home': (context) =>  HomeScreen(),
+        '/home': (context) =>  const HomeScreen(),
         '/detect_currency': (context) => const DetectCurrency(),
         '/login': (context) => const LoginScreen(),
-        '/sign_in': (context) => SignupScreen(),
+        '/sign_in': (context) => const SignupScreen(),
         '/forgot_password': (context) => ForgotPassword(),
         '/record': (context) => const PreviousRecord(),
         '/upload_currency': (context) => const UploadCurrency(),

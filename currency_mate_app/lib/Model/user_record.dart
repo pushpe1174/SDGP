@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 
 class UserRecord {
-    String? userid=FirebaseAuth.instance.currentUser?.uid;
+    String? userid = FirebaseAuth.instance.currentUser?.uid;
     DateTime date;
     int total;
     int note5000;

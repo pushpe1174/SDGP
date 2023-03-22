@@ -18,8 +18,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
 
   _speak(String text) async{
     await flutterTts.setLanguage("en-US");
-    await flutterTts.setSpeechRate(0.4);
-    await flutterTts.setPitch(1.0);
+    await flutterTts.setSpeechRate(0.3);
+    await flutterTts.setPitch(1);
     await flutterTts.setVolume(1.0);
     await flutterTts.speak(text);
   }
@@ -106,7 +106,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   height: 60,
                   child: FloatingActionButton(
                     backgroundColor: const Color(0xFF1D3557),
-                    onPressed: () => _speak("Total amount is $total"),
+                    onPressed: () => _speak("Total amount is $total rupees"),
                     child: const Icon(
                       Icons.volume_up_sharp,
                       size: 40,

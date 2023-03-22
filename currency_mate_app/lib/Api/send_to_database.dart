@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_mate_app/Utils/get_total.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../Model/user_record.dart';
 
@@ -21,7 +22,7 @@ class SendToDatabase{
       noteAmount.add(value);
     }
     final record = UserRecord(
-        "aS",
+        FirebaseAuth.instance.currentUser?.uid.toString(),
         DateTime.now(),
         total,
         noteAmount[0],

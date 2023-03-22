@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:currency_mate_app/Screens/summary_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -33,7 +34,8 @@ class _PreviousRecordState extends State<PreviousRecord> {
       final documentDate = document['date'].toDate();
       return documentDate.year == selectedDate.year &&
           documentDate.month == selectedDate.month &&
-          documentDate.day == selectedDate.day;
+          documentDate.day == selectedDate.day &&
+          document["userid"]== FirebaseAuth.instance.currentUser?.uid.toString();
     }).toList();
     return Column(
       children: [

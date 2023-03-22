@@ -1,11 +1,32 @@
 import 'package:currency_mate_app/Screens/login_screen.dart';
+import 'package:currency_mate_app/Service/auth_service.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget{
+  const HomeScreen({super.key});
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+class HomeScreenState extends State<HomeScreen>{
+  late AuthClass authClass;
+
+  _printUserID(){
+    authClass = AuthClass();
+    print(FirebaseAuth.instance.currentUser?.uid.toString());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _printUserID();
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +39,7 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(onPressed:() async{
-            await FirebaseAuth.instance.signOut().then((value) {
+            await authClass.logout().then((value) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const LoginScreen())
               );

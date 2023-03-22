@@ -1,9 +1,10 @@
+import 'package:currency_mate_app/Service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
-  SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({Key? key}) : super(key: key);
 
 
   @override
@@ -16,6 +17,7 @@ class _SignupScreenState extends State<SignupScreen>{
   final signupEmailController=TextEditingController();
   final signupPasswordController=TextEditingController();
   bool loading=false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +43,13 @@ class _SignupScreenState extends State<SignupScreen>{
               ),
             ),
             const SizedBox(
-                height: 70
+                height: 40
             ),
+
+            const SizedBox(
+                height: 30
+            ),
+
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -103,7 +110,7 @@ class _SignupScreenState extends State<SignupScreen>{
                       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  HomeScreen())
                         );
                       });
 

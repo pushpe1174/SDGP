@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class DetectionApi{
   static Future<Map<int, int>> uploadImage(File selectedImage) async {
-    final request = http.MultipartRequest("POST", Uri.parse("https://310a-112-134-156-4.in.ngrok.io/upload"));
+    final request = http.MultipartRequest("POST", Uri.parse("https://b1c4-112-134-158-67.in.ngrok.io/upload"));
     final headers = {'Content-Type': 'multipart/form-data'};
 
     request.files.add(

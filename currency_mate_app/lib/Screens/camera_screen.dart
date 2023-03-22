@@ -149,7 +149,7 @@ class _DetectCurrencyState extends State<DetectCurrency> {
                     future: _getDetection(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return LoadingAnimationWidget.beat(
+                        return LoadingAnimationWidget.dotsTriangle(
                             color: const Color(0xff1D3557),
                             size: 50,
                         );

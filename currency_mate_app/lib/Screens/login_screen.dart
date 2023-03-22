@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../Service/Auth_Service.dart';
 import '../Utils/style.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
@@ -18,6 +19,7 @@ class LoginScreenState extends State<LoginScreen>{
   final loginPasswordController=TextEditingController();
   bool loading =false;
   bool isLoggedIn=false;
+  AuthClass authClass=AuthClass();
 
 
 
@@ -45,6 +47,43 @@ class LoginScreenState extends State<LoginScreen>{
                     height: 150,
                     child: Image.asset('assets/SplashLogo.png')),
               ),
+            ),
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 15),
+              child:ElevatedButton(
+                  onPressed: ()async{
+                    try{
+                      await authClass.googleSignIn(context).then((value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  HomeScreen())
+                        );
+                      });
+                    }on FirebaseAuthException catch (e){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content:Text(e.message.toString()),
+                            backgroundColor: Colors.red,)
+                      );
+                    }
+
+                    ;
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      )
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/google_logo.png",
+                        height: 40,),
+                      const SizedBox(width: 10),
+                      const Text("Sign in with Google",
+                        style: TextStyle(fontSize: 18,color: Colors.black),)
+
+                    ],
+                  )),
             ),
 
              Padding(
@@ -118,7 +157,7 @@ class LoginScreenState extends State<LoginScreen>{
                       await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  HomeScreen())
                         );
                       });
                     }on FirebaseAuthException catch (e){

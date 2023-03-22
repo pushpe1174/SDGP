@@ -33,7 +33,8 @@ class _PreviousRecordState extends State<PreviousRecord> {
       final documentDate = document['date'].toDate();
       return documentDate.year == selectedDate.year &&
           documentDate.month == selectedDate.month &&
-          documentDate.day == selectedDate.day;
+          documentDate.day == selectedDate.day &&
+          document["userId"]=="xmVmsma4C4Yc0bHiizBIPyetQsy1";
     }).toList();
     return Column(
       children: [

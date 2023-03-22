@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class UserRecord {
-    String userid;
+    String? userid=FirebaseAuth.instance.currentUser?.uid;
     DateTime date;
     int total;
     int note5000;
@@ -28,7 +30,7 @@ class UserRecord {
       final date = (data['date'] as Timestamp).toDate();
 
       return UserRecord(
-        data['userId'],
+        data['userid'],
         date,
         data['total'],
         data['5000'],

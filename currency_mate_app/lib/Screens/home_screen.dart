@@ -1,14 +1,16 @@
 import 'package:currency_mate_app/Screens/login_screen.dart';
-import 'package:currency_mate_app/Service/Auth_Service.dart';
+import 'package:currency_mate_app/Service/auth_service.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class HomeScreen extends StatefulWidget{
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
-class _HomeScreenState extends State<HomeScreen>{
+class HomeScreenState extends State<HomeScreen>{
   AuthClass authClass = AuthClass();
   @override
   Widget build(BuildContext context) {

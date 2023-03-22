@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../Service/Auth_Service.dart';
+import '../Service/auth_service.dart';
 import '../Utils/style.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
@@ -55,7 +55,7 @@ class LoginScreenState extends State<LoginScreen>{
                       await authClass.googleSignIn(context).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  const HomeScreen())
                         );
                       });
                     }on FirebaseAuthException catch (e){
@@ -64,8 +64,6 @@ class LoginScreenState extends State<LoginScreen>{
                             backgroundColor: Colors.red,)
                       );
                     }
-
-                    ;
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -157,7 +155,7 @@ class LoginScreenState extends State<LoginScreen>{
                       await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  const HomeScreen())
                         );
                       });
                     }on FirebaseAuthException catch (e){
@@ -194,7 +192,7 @@ class LoginScreenState extends State<LoginScreen>{
                       TextButton(onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>   SignupScreen()),
+                          MaterialPageRoute(builder: (context) =>   const SignupScreen()),
                         );
                       },
                         child: const Text("create account",

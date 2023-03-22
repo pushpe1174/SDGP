@@ -61,7 +61,7 @@ class MyAppState extends State<MyApp> {
         '/sign_in': (context) => const SignupScreen(),
         '/forgot_password': (context) => ForgotPassword(),
         '/record': (context) => const PreviousRecord(),
-        '/upload_currency': (context) => const UploadCurrency(),
+        '/upload_currency': (context) => const CameraDetectCurrency(),
       },
     );
   }

@@ -142,10 +142,12 @@ class HomeScreenState extends State<HomeScreen>{
                     children: [
                       Image.asset(
                         'assets/camera_icon.png',
-                        height: 100,
-                        width: 100,
+                        height: 80,
+                        width: 110,
+                        scale: 0.2,
                         fit: BoxFit.cover,
                       ),
+                      const Gap(10),
                       Text(
                         "Camera",
                         style: Style.headingStyle2,

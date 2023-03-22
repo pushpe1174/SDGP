@@ -50,14 +50,14 @@ class MyAppState extends State<MyApp> {
       theme: ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/home',
+      initialRoute: '/loading',
       routes: {
         '/current_page':(context)=> currentPage,
         '/loading': (context) => const LoadingScreen(),
         '/home': (context) =>  const HomeScreen(),
         '/detect_currency': (context) => const DetectCurrency(),
         '/login': (context) => const LoginScreen(),
-        '/sign_in': (context) => const SignupScreen(),
+        '/sign_up': (context) => const SignupScreen(),
         '/forgot_password': (context) => ForgotPassword(),
         '/record': (context) => const PreviousRecord(),
         '/upload_currency': (context) => const CameraDetectCurrency(),

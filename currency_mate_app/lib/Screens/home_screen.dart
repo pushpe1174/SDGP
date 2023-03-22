@@ -141,7 +141,7 @@ class HomeScreenState extends State<HomeScreen>{
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/UploadImage.jpg',
+                        'assets/camera_icon.png',
                         height: 100,
                         width: 100,
                         fit: BoxFit.cover,

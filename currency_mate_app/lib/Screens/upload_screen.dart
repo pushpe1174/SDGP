@@ -111,13 +111,13 @@ class _CameraDetectCurrencyState extends State<CameraDetectCurrency> {
                 const Gap(40),
                 Center(
                   child: SizedBox(
-                    width: 150,
+                    width: 180,
                     height: 50,
                     child: ElevatedButton.icon(
                       onPressed: () async{
                         _requestPermission();
                       },
-                      icon: const Icon(Icons.upload),
+                      icon: const Icon(Icons.camera),
                       label: Text(
                         "Camera",
                         style: Style.numberStyle3,

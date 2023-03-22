@@ -49,9 +49,8 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: primary,
-
       ),
-      initialRoute: '/current_page',
+      initialRoute: '/home',
       routes: {
         '/current_page':(context)=> currentPage,
         '/loading': (context) => const LoadingScreen(),

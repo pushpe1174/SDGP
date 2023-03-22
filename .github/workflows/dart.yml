@@ -18,6 +18,15 @@ jobs:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.0.5'
+        flutter-version: '3.7.0'
         channel: 'stable'
     - run: flutter --version
+    - run: |
+        cd currency_mate_app
+        flutter pub get
+    - run: |
+        cd currency_mate_app
+        flutter build apk
+    - run: |
+        cd currency_mate_app
+        flutter build appbundle

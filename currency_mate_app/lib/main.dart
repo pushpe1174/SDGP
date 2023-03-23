@@ -50,7 +50,7 @@ class MyAppState extends State<MyApp> {
       theme: ThemeData(
         primaryColor: primary,
       ),
-      initialRoute: '/home',
+      initialRoute: '/current_page',
       routes: {
         '/current_page':(context)=> currentPage,
         '/loading': (context) => const LoadingScreen(),

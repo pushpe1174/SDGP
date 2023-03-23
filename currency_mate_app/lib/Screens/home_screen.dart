@@ -33,6 +33,7 @@ class HomeScreenState extends State<HomeScreen>{
     return Scaffold(
       backgroundColor: Style.bgColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "Home",
           style: Style.headingStyle,

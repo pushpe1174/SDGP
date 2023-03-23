@@ -59,7 +59,7 @@ class LoginScreenState extends State<LoginScreen>{
                   onPressed: ()async{
                     try{
                       await authClass.googleSignIn(context).then((value) {
-                        Navigator.push(
+                        Navigator.pop(
                             context,
                             MaterialPageRoute(builder: (context) =>  const HomeScreen())
                         );

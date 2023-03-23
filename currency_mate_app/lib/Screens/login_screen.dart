@@ -31,6 +31,7 @@ class LoginScreenState extends State<LoginScreen>{
       backgroundColor: Style.bgColor,
 
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("LOGIN",
         style: TextStyle(fontFamily: "Arial"),),
         centerTitle: true,

@@ -1,6 +1,8 @@
-import 'package:currency_mate_app/Service/auth_service.dart';
+import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import '../Utils/style.dart';
 import 'home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -25,7 +27,7 @@ class _SignupScreenState extends State<SignupScreen>{
       backgroundColor: const Color(0xffF1FAEE),
 
       appBar: AppBar(
-        title: const Text("Sign-In Page"),
+        title: const Text("Sign Up Page"),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),
@@ -42,8 +44,11 @@ class _SignupScreenState extends State<SignupScreen>{
                     child: Image.asset('assets/SplashLogo.png')),
               ),
             ),
+            const Gap(10),
+            Text("currencyMate".toUpperCase(),
+              style: Style.loadingStyle,),
             const SizedBox(
-                height: 40
+                height: 10
             ),
 
             const SizedBox(
@@ -110,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen>{
                       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  const HomeScreen())
                         );
                       });
 
@@ -127,15 +132,29 @@ class _SignupScreenState extends State<SignupScreen>{
 
                   },
                   child: const Text(
-                    'Sign-In',
+                    'Sign-Up',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),),
               );
             }),
             const SizedBox(
-              height: 130,
+              height: 20,
             ),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Already have an account?"),
+                TextButton(onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  const LoginScreen())
+                  );
+                }, child: const Text("Login",
+                style: TextStyle(color:Color(0xff1D3557) ),))
+
+              ],
+            )
+
           ],
 
 

@@ -49,7 +49,6 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: primary,
-
       ),
       initialRoute: '/current_page',
       routes: {
@@ -58,10 +57,10 @@ class MyAppState extends State<MyApp> {
         '/home': (context) =>  const HomeScreen(),
         '/detect_currency': (context) => const DetectCurrency(),
         '/login': (context) => const LoginScreen(),
-        '/sign_in': (context) => const SignupScreen(),
+        '/sign_up': (context) => const SignupScreen(),
         '/forgot_password': (context) => ForgotPassword(),
         '/record': (context) => const PreviousRecord(),
-        '/upload_currency': (context) => const UploadCurrency(),
+        '/upload_currency': (context) => const CameraDetectCurrency(),
       },
     );
   }

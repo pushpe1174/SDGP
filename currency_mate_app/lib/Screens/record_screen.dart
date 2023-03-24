@@ -3,7 +3,6 @@ import 'package:currency_mate_app/Screens/summary_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../Utils/style.dart';
 
 class PreviousRecord extends StatefulWidget {

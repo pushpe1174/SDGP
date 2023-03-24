@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
+import '../Utils/style.dart';
 import 'login_screen.dart';
 
 
@@ -25,21 +27,33 @@ class ForgotPassword extends StatelessWidget {
                 child: Image.asset('assets/SplashLogo.png'),
               ),
             ),
+            const Gap(10),
+            Text("currencyMate".toUpperCase(),
+              style: Style.loadingStyle,),
+
+            const SizedBox(height: 20,),
+
             const Padding(
               padding: EdgeInsets.only(top: 0),
               child: Align(
                 alignment: Alignment.center,
-                child: Text("Reset Password",textAlign: TextAlign.center,style: TextStyle(fontSize: 30),
+                child: Text("Reset Password",textAlign: TextAlign.center,style: TextStyle(fontSize: 30,fontFamily: "Arial"),
                 ),
               ),
             ),
+             const SizedBox(height: 10,),
+             const Center(
+               child: Text("Fear not. We'll email you instructions to reset your password.Make sure you enter a valid E-mail",
+               style: TextStyle(fontFamily: "Arial"),
+                 textAlign: TextAlign.center,
+               ),
+             ),
              Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
 
                 controller: resetEmailController,
-
                 obscureText: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -56,7 +70,7 @@ class ForgotPassword extends StatelessWidget {
                   await FirebaseAuth.instance.sendPasswordResetEmail(email: resetEmailController.text).then((value) {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen())
+                      MaterialPageRoute(builder: (context) => const LoginScreen())
                   );
                 });
 
@@ -70,7 +84,8 @@ class ForgotPassword extends StatelessWidget {
 
 
               },
-              child: const Text('Reset Password'),
+              child: const Text('Reset Password',
+              style: TextStyle(fontFamily: "Arial"),),
             ),
           ],
         ),

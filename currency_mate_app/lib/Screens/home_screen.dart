@@ -33,6 +33,7 @@ class HomeScreenState extends State<HomeScreen>{
     return Scaffold(
       backgroundColor: Style.bgColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "Home",
           style: Style.headingStyle,
@@ -141,11 +142,13 @@ class HomeScreenState extends State<HomeScreen>{
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/UploadImage.jpg',
-                        height: 100,
-                        width: 100,
+                        'assets/camera_icon.png',
+                        height: 80,
+                        width: 110,
+                        scale: 0.2,
                         fit: BoxFit.cover,
                       ),
+                      const Gap(10),
                       Text(
                         "Camera",
                         style: Style.headingStyle2,

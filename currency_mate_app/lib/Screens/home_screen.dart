@@ -4,6 +4,7 @@ import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatefulWidget{
   const HomeScreen({super.key});
@@ -28,8 +29,10 @@ class HomeScreenState extends State<HomeScreen>{
   }
 
 
+
   @override
   Widget build(BuildContext context) {
+    FlutterTts flutterTts = FlutterTts();
     return Scaffold(
       backgroundColor: Style.bgColor,
       appBar: AppBar(
@@ -55,18 +58,22 @@ class HomeScreenState extends State<HomeScreen>{
       ),
 
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
         child: Center(
           child: Column(
             children: [
               const Gap(15),
               SizedBox(
                 width: 300,
-                height: 180,
+                height: 170,
                 child: ElevatedButton(
 
                   onPressed: (){
                     Navigator.pushNamed(context, '/detect_currency');
+                  },
+
+                  onLongPress: (){
+                    flutterTts.speak('Detect Currency');
                   },
 
                   style: ElevatedButton.styleFrom(
@@ -95,11 +102,16 @@ class HomeScreenState extends State<HomeScreen>{
               const Gap(15),
               SizedBox(
                 width: 300,
-                height: 180,
+                height: 170,
                 child: ElevatedButton(
                   onPressed: (){
                     Navigator.pushNamed(context, '/record');
                   },
+
+                  onLongPress: (){
+                    flutterTts.speak('Previous Records');
+                  },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
@@ -127,11 +139,16 @@ class HomeScreenState extends State<HomeScreen>{
               const Gap(15),
               SizedBox(
                 width: 300,
-                height: 180,
+                height: 170,
                 child: ElevatedButton(
                   onPressed: (){
                     Navigator.pushNamed(context, '/upload_currency');
                   },
+
+                  onLongPress: (){
+                    flutterTts.speak('Open Camera');
+                  },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
@@ -152,6 +169,37 @@ class HomeScreenState extends State<HomeScreen>{
                       Text(
                         "Camera",
                         style: Style.headingStyle2,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const Gap(15),
+              SizedBox(
+                width: 360,
+                height: 60,
+                child: TextButton(
+                  onPressed: (){
+                    flutterTts.speak('Tap and hold the buttons to hear the voice support');
+                  },
+
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1D3557),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Gap(10),
+                      Text(
+                        "Voice Instructions",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       )
                     ],
                   ),

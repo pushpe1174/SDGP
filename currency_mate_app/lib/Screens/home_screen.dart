@@ -192,7 +192,6 @@ class HomeScreenState extends State<HomeScreen>{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Gap(10),
                       Text(
                         "Voice Instructions",
                         style: TextStyle(

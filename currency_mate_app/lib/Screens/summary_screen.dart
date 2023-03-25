@@ -119,7 +119,9 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   height: 60,
                   child: FloatingActionButton(
                     backgroundColor: const Color(0xFF1D3557),
-                    onPressed: () => _speak("Total amount is $total rupees"),
+                    onPressed: () => {
+                      _speak(_getSummaryNote() + "and Total amount is $total rupees")
+                      },
                     child: const Icon(
                       Icons.volume_up_sharp,
                       size: 40,

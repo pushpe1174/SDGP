@@ -58,14 +58,14 @@ class HomeScreenState extends State<HomeScreen>{
       ),
 
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
         child: Center(
           child: Column(
             children: [
               const Gap(15),
               SizedBox(
                 width: 300,
-                height: 180,
+                height: 170,
                 child: ElevatedButton(
 
                   onPressed: (){
@@ -102,7 +102,7 @@ class HomeScreenState extends State<HomeScreen>{
               const Gap(15),
               SizedBox(
                 width: 300,
-                height: 180,
+                height: 170,
                 child: ElevatedButton(
                   onPressed: (){
                     Navigator.pushNamed(context, '/record');
@@ -139,7 +139,7 @@ class HomeScreenState extends State<HomeScreen>{
               const Gap(15),
               SizedBox(
                 width: 300,
-                height: 180,
+                height: 170,
                 child: ElevatedButton(
                   onPressed: (){
                     Navigator.pushNamed(context, '/upload_currency');
@@ -169,6 +169,37 @@ class HomeScreenState extends State<HomeScreen>{
                       Text(
                         "Camera",
                         style: Style.headingStyle2,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const Gap(15),
+              SizedBox(
+                width: 360,
+                height: 60,
+                child: TextButton(
+                  onPressed: (){
+                    flutterTts.speak('Tap and hold the buttons to hear the instructions');
+                  },
+
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1D3557),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Gap(10),
+                      Text(
+                        "Voice Instructions",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       )
                     ],
                   ),

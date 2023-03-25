@@ -28,9 +28,11 @@ class _SummaryScreenState extends State<SummaryScreen> {
   _getSummaryNote(){
     String summary = "You have detected";
     for (int note in notes) {
-      if(widget.res[note] != 0){
-        String word = widget.res[note] == 1? "note" : "notes";
-        summary += " ${widget.res[note]}|$note $word,";
+      if(widget.res[note] != null){
+        if(widget.res[note] != 0){
+          String word = widget.res[note] == 1? "note" : "notes";
+          summary += " ${widget.res[note]}|$note $word,";
+        }
       }
     }
     print(summary);

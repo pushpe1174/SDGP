@@ -1,9 +1,12 @@
+import 'package:currency_mate_app/Screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import '../Utils/style.dart';
 import 'home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
-  SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({Key? key}) : super(key: key);
 
 
   @override
@@ -17,13 +20,14 @@ class _SignupScreenState extends State<SignupScreen>{
   final signupPasswordController=TextEditingController();
   bool loading=false;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF1FAEE),
 
       appBar: AppBar(
-        title: const Text("Sign-In Page"),
+        title: const Text("Sign Up Page"),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),
@@ -40,9 +44,17 @@ class _SignupScreenState extends State<SignupScreen>{
                     child: Image.asset('assets/SplashLogo.png')),
               ),
             ),
+            const Gap(10),
+            Text("currencyMate".toUpperCase(),
+              style: Style.loadingStyle,),
             const SizedBox(
-                height: 70
+                height: 10
             ),
+
+            const SizedBox(
+                height: 30
+            ),
+
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -103,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen>{
                       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: signupEmailController.text, password: signupPasswordController.text).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  const HomeScreen())
                         );
                       });
 
@@ -120,15 +132,29 @@ class _SignupScreenState extends State<SignupScreen>{
 
                   },
                   child: const Text(
-                    'Sign-In',
+                    'Sign-Up',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),),
               );
             }),
             const SizedBox(
-              height: 130,
+              height: 20,
             ),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Already have an account?"),
+                TextButton(onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  const LoginScreen())
+                  );
+                }, child: const Text("Login",
+                style: TextStyle(color:Color(0xff1D3557) ),))
+
+              ],
+            )
+
           ],
 
 

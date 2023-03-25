@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import '../Service/auth_service.dart';
 import '../Utils/style.dart';
 import 'forgot_password_screen.dart';
 import 'home_screen.dart';
@@ -18,6 +20,7 @@ class LoginScreenState extends State<LoginScreen>{
   final loginPasswordController=TextEditingController();
   bool loading =false;
   bool isLoggedIn=false;
+  AuthClass authClass=AuthClass();
 
 
 
@@ -28,7 +31,9 @@ class LoginScreenState extends State<LoginScreen>{
       backgroundColor: Style.bgColor,
 
       appBar: AppBar(
-        title: const Text("Login Page"),
+        automaticallyImplyLeading: false,
+        title: const Text("LOGIN",
+        style: TextStyle(fontFamily: "Arial"),),
         centerTitle: true,
         backgroundColor: const Color(0xff1D3557),
       ),
@@ -46,7 +51,62 @@ class LoginScreenState extends State<LoginScreen>{
                     child: Image.asset('assets/SplashLogo.png')),
               ),
             ),
+            const Gap(10),
+            Text("currencyMate".toUpperCase(),
+              style: Style.loadingStyle,),
 
+            Padding(padding: const EdgeInsets.symmetric(horizontal: 15),
+              child:ElevatedButton(
+                  onPressed: ()async{
+                    try{
+                      await authClass.googleSignIn(context).then((value) {
+                        Navigator.pop(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  const HomeScreen())
+                        );
+                      });
+                    }on FirebaseAuthException catch (e){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content:Text(e.message.toString()),
+                            backgroundColor: Colors.red,)
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Style.bgColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(color: Color(0xff1D3557))
+                      )
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/google_logo.png",
+                        height: 40,),
+                      const SizedBox(width: 10),
+                      const Text("Sign In with Google",
+                        style: TextStyle(fontSize: 18,color: Colors.black,fontFamily: "Arial"))
+
+                    ],
+                  )),
+            ),
+            const SizedBox(
+                width: 200,
+                height: 20,
+                ),
+
+             Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: const [
+                 Text("----------------------------- or ----------------------------",
+                 style: TextStyle(color:Color(0xff1D3557),fontSize: 20),)
+               ],
+             ),
+            const SizedBox(
+              width: 200,
+              height: 20,
+            ),
              Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -74,7 +134,7 @@ class LoginScreenState extends State<LoginScreen>{
                 obscureText: true,
                 decoration:  InputDecoration(
                   border: OutlineInputBorder(
-                    
+
                     borderRadius: BorderRadius.circular(10.0)
                   ),
                   labelText: 'Password',
@@ -118,7 +178,7 @@ class LoginScreenState extends State<LoginScreen>{
                       await FirebaseAuth.instance.signInWithEmailAndPassword(email: loginEmailController.text, password: loginPasswordController.text).then((value) {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen())
+                            MaterialPageRoute(builder: (context) =>  const HomeScreen())
                         );
                       });
                     }on FirebaseAuthException catch (e){
@@ -136,7 +196,7 @@ class LoginScreenState extends State<LoginScreen>{
                   },
                   child: const Text(
                     'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20,fontFamily: "Arial"),
                   ),),
 
               );
@@ -144,7 +204,7 @@ class LoginScreenState extends State<LoginScreen>{
 
 
             const SizedBox(
-              height: 130,
+              height: 10,
             ),
 
             Column(
@@ -155,7 +215,7 @@ class LoginScreenState extends State<LoginScreen>{
                       TextButton(onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>   SignupScreen()),
+                          MaterialPageRoute(builder: (context) =>   const SignupScreen()),
                         );
                       },
                         child: const Text("create account",

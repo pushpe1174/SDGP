@@ -1,12 +1,33 @@
 import 'package:currency_mate_app/Screens/login_screen.dart';
+import 'package:currency_mate_app/Service/auth_service.dart';
 import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget{
+  const HomeScreen({super.key});
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+class HomeScreenState extends State<HomeScreen>{
+  late AuthClass authClass;
+
+  _printUserID(){
+    authClass = AuthClass();
+    print(FirebaseAuth.instance.currentUser?.uid.toString());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _printUserID();
+
+  }
+
 
 
   @override
@@ -15,13 +36,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Style.bgColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "Home",
           style: Style.headingStyle,
         ),
         actions: <Widget>[
           IconButton(onPressed:() async{
-            await FirebaseAuth.instance.signOut().then((value) {
+            await authClass.logout().then((value) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const LoginScreen())
               );
@@ -137,11 +159,13 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/UploadImage.jpg',
-                        height: 100,
-                        width: 100,
+                        'assets/camera_icon.png',
+                        height: 80,
+                        width: 110,
+                        scale: 0.2,
                         fit: BoxFit.cover,
                       ),
+                      const Gap(10),
                       Text(
                         "Camera",
                         style: Style.headingStyle2,

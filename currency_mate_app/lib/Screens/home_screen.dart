@@ -3,12 +3,15 @@ import 'package:currency_mate_app/Utils/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    FlutterTts flutterTts = FlutterTts();
     return Scaffold(
       backgroundColor: Style.bgColor,
       appBar: AppBar(
@@ -47,6 +50,10 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, '/detect_currency');
                   },
 
+                  onLongPress: (){
+                    flutterTts.speak('Detect Currency');
+                  },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
@@ -78,6 +85,11 @@ class HomeScreen extends StatelessWidget {
                   onPressed: (){
                     Navigator.pushNamed(context, '/record');
                   },
+
+                  onLongPress: (){
+                    flutterTts.speak('Previous Records');
+                  },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
@@ -110,6 +122,11 @@ class HomeScreen extends StatelessWidget {
                   onPressed: (){
                     Navigator.pushNamed(context, '/upload_currency');
                   },
+
+                  onLongPress: (){
+                    flutterTts.speak('Open Camera');
+                  },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(

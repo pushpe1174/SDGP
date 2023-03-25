@@ -180,7 +180,7 @@ class HomeScreenState extends State<HomeScreen>{
                 height: 60,
                 child: TextButton(
                   onPressed: (){
-                    flutterTts.speak('Tap and hold the buttons to hear the instructions');
+                    flutterTts.speak('Tap and hold the buttons to hear the voice support');
                   },
 
                   style: ElevatedButton.styleFrom(

@@ -12,10 +12,10 @@ class SendToDatabase{
 
   sendDatabase() async {
     total = GetTotal.getTotal(detect);
-    await _createRecord(detect, total);
+    await createRecord(detect, total);
   }
 
-  _createRecord(Map<int, int> detect , total) async {
+  createRecord(Map<int, int> detect , total) async {
     List<int> noteAmount = [];
     for (int note in notes) {
       int value = detect[note] == null ? 0 : detect[note]!;

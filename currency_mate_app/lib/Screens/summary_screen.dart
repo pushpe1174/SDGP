@@ -23,6 +23,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
     await flutterTts.setVolume(1.0);
     await flutterTts.speak(text);
   }
+  
 
   _getSummaryNote(){
     String summary = "You have detected";

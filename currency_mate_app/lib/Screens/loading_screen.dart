@@ -10,7 +10,7 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 4),(){
+    Future.delayed(const Duration(seconds: 30),(){
       Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const LoginScreen())
@@ -22,6 +22,7 @@ class LoadingScreen extends StatelessWidget {
       backgroundColor: Style.bgColor,
       body: Column(
         children: [
+          const Gap(60),
           Expanded(
               child: SafeArea(
                 child: Padding(
@@ -46,7 +47,7 @@ class LoadingScreen extends StatelessWidget {
                                 speed: const Duration(milliseconds: 200)
                               )
                             ],),
-                            const Gap(25),
+                            const Gap(10),
                             const SpinKitCircle(
                               color: Color(0xff9EC359),
                               // color: Color(0xffE3BB40),
@@ -54,7 +55,6 @@ class LoadingScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         Text(
                           "#TeamElite",
                           style: Style.loadingTeamStyle,

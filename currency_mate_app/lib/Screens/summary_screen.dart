@@ -23,6 +23,19 @@ class _SummaryScreenState extends State<SummaryScreen> {
     await flutterTts.setVolume(1.0);
     await flutterTts.speak(text);
   }
+  
+
+  _getSummaryNote(){
+    String summary = "You have detected";
+    for (int note in notes) {
+      if(widget.res[note] != 0){
+        String word = widget.res[note] == 1? "note" : "notes";
+        summary += " ${widget.res[note]}|$note $word,";
+      }
+    }
+    print(summary);
+    return summary;
+    }
 
   _getTotal(){
     total = GetTotal.getTotal(widget.res);
@@ -106,7 +119,9 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   height: 60,
                   child: FloatingActionButton(
                     backgroundColor: const Color(0xFF1D3557),
-                    onPressed: () => _speak("Total amount is $total rupees"),
+                    onPressed: () => {
+                      _speak(_getSummaryNote() + "and Total amount is $total rupees")
+                      },
                     child: const Icon(
                       Icons.volume_up_sharp,
                       size: 40,

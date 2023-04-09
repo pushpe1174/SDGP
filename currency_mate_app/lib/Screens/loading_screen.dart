@@ -10,7 +10,7 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 30),(){
+    Future.delayed(const Duration(seconds: 5),(){
       Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const LoginScreen())
